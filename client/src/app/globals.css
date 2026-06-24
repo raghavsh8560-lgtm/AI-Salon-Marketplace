@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #FF5E7E;
+  --color-primary-hover: #E04B6A;
+  --color-secondary: #FFD3DC;
+  --color-brand-bg: #FFFDFE;
+  --color-accent-gold: #E5BA73;
+  --color-dark-text: #2A1A1F;
+  
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    background-color: var(--color-brand-bg);
+    color: var(--color-dark-text);
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 253, 254, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 94, 126, 0.08);
+}
+
+.dark .glass {
+  background: rgba(23, 17, 20, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Premium shadows & borders */
+.rose-shadow {
+  box-shadow: 0 10px 30px -5px rgba(255, 94, 126, 0.08);
+}
+
+.rose-shadow-lg {
+  box-shadow: 0 20px 40px -10px rgba(255, 94, 126, 0.12);
+}
+
+.gold-border {
+  border: 1.5px solid rgba(229, 186, 115, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFD3DC;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #372A2E;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF5E7E;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

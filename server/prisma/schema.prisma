@@ -1,0 +1,239 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              String        @id @default(uuid())
+  name            String
+  email           String        @unique
+  password        String?
+  role            String        @default("USER") // USER, OWNER, ADMIN
+  suspended       Boolean       @default(false)
+  
+  // Assessments
+  hairType        String?
+  hairLength      String?
+  hairGoals       String?
+  hairConcerns    String?
+  
+  skinType        String?
+  skinTone        String?
+  skinConcerns    String?
+  
+  budgetRange     String?       // BUDGET, MID, LUXURY
+  occasion        String?
+  preferences     String?
+  
+  favoriteSalons  String[]      @default([]) // Array of salon IDs
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  bookings        Booking[]
+  chatSessions    ChatSession[]
+  ownedSalons     Salon[]       @relation("SalonOwner")
+}
+
+model Salon {
+  id                String              @id
+  name              String
+  slug              String              @unique
+  coverImage        String
+  gallery           String[]
+  brandStory        String
+  overview          String
+  expertise         String[]
+  teamStructure     String
+  certifications    String[]
+  pricingCategory   String              // BUDGET, MID, LUXURY
+  openingHours      String
+  location          String
+  area              String              // Malviya Nagar, C-Scheme, etc.
+  address           String
+  phone             String
+  amenities         String[]
+  technologies      String[]
+  hygieneStandards  String
+  serviceGuarantee  String
+  bookingPolicies   String
+  rating            Float
+  reviewsCount      Int
+  genderCategory    String              // FEMALE, MALE, UNISEX
+  featured          Boolean             @default(false)
+  
+  ownerId           String?
+  owner             User?               @relation("SalonOwner", fields: [ownerId], references: [id])
+  status            String              @default("APPROVED") // PENDING, APPROVED, SUSPENDED
+  isVerified        Boolean             @default(true)
+  offers            String[]            @default([])
+  
+  services          Service[]
+  packages          Package[]
+  membershipPlans   MembershipPlan[]
+  professionals     SalonProfessional[]
+  bookings          Booking[]
+  reviews           Review[]
+  posts             SalonPost[]
+  frozenSlots       FrozenSlot[]
+}
+
+model SalonPost {
+  id          String   @id @default(uuid())
+  salonId     String
+  salon       Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  image       String?
+  video       String?
+  content     String
+  category    String   // Offer, Announcement, Transformation, Customer Result, Image, Video
+  likes       String[] @default([]) // Array of User IDs who liked the post
+  createdAt   DateTime @default(now())
+}
+
+model FrozenSlot {
+  id        String   @id @default(uuid())
+  salonId   String
+  salon     Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  date      String   // YYYY-MM-DD
+  time      String   // HH:MM slot
+  reason    String   // Staff unavailable, Equipment maintenance, Private event, Emergency closure
+  createdAt DateTime @default(now())
+}
+
+model SalonProfessional {
+  id              String    @id @default(uuid())
+  name            String
+  specialization  String
+  yearsExperience Int
+  certifications  String[]
+  bio             String
+  profileImage    String
+  
+  salonId         String
+  salon           Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  bookings        Booking[]
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  salonId     String
+  salon       Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  name        String
+  category    String   // Hair, Skin, Beauty, Spa, Bridal, Luxury Grooming, Men's Grooming, Fashion Styling, Wellness, etc.
+  price       Float
+  duration    Int      // in minutes
+  description String
+}
+
+model Package {
+  id          String   @id @default(uuid())
+  salonId     String
+  salon       Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  name        String
+  price       Float
+  services    String[] // list of service names included
+  description String
+}
+
+model MembershipPlan {
+  id        String   @id @default(uuid())
+  salonId   String
+  salon     Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  name      String
+  price     Float
+  benefits  String[]
+  duration  String   // Monthly, Quarterly, Annual
+}
+
+model Review {
+  id      String @id @default(uuid())
+  salonId String
+  salon   Salon  @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  name    String
+  rating  Float
+  comment String
+  date    String // YYYY-MM-DD
+}
+
+model Booking {
+  id             String             @id // Booking reference code (e.g. SA-10294)
+  userId         String
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  salonId        String
+  salon          Salon              @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  professionalId String?
+  professional   SalonProfessional? @relation(fields: [professionalId], references: [id])
+  date           String             @db.VarChar(10) // YYYY-MM-DD
+  time           String             @db.VarChar(5)  // HH:MM
+  services       Json               // Array of booked services { name, category, price }
+  totalPrice     Float
+  status         String             @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  createdAt      DateTime           @default(now())
+}
+
+model Product {
+  id                String   @id
+  name              String
+  category          String   // Hair, Skin, Beauty, Wellness
+  price             Float
+  brand             String
+  description       String
+  benefits          String
+  usageInstructions String
+  skinTypes         String[]
+  hairTypes         String[]
+  rating            Float
+  image             String
+}
+
+model FAQ {
+  id       String @id @default(uuid())
+  question String
+  answer   String
+  category String // General, Skin, Hair, Booking, Payments
+}
+
+model Guide {
+  id       String   @id @default(uuid())
+  title    String
+  content  String
+  category String   // Skin, Hair, Wellness, Makeup, Fashion
+  tags     String[]
+}
+
+model ChatSession {
+  id        String        @id // unique session id
+  title     String
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id                  String      @id @default(uuid())
+  sessionId           String
+  session             ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sender              String      // user, ai
+  text                String
+  createdAt           DateTime    @default(now())
+  recommendedSalons   Json?       // array of salons { id, name, area, matchedService }
+  recommendedProducts Json?       // array of products { id, name, brand, price }
+  routinePlanner      Json?       // generated routine steps
+}
+
+model AIAnalytics {
+  id                       String   @id @default(uuid())
+  mostAskedQuestions       Json     // e.g. [{question: "frizzy hair", count: 12}]
+  mostRecommendedServices  Json     // e.g. [{service: "Keratin Treatment", count: 8}]
+  mostRecommendedSalons    Json     // e.g. [{salonName: "La Belleza", count: 5}]
+  popularTreatments        Json     // e.g. [{treatment: "Hydra Facial", count: 10}]
+  chatSatisfaction         Float    @default(5.0) // running average rating out of 5
+  totalChats               Int      @default(0)
+  updatedAt                DateTime @updatedAt
+}

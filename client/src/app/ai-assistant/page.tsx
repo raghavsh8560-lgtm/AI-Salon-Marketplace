@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { 
-  Sparkles, MessageSquare, Plus, Trash2, Send, ChevronRight, 
-  User, Settings, X, RefreshCw, Star, MapPin, DollarSign, 
+import {
+  Sparkles, MessageSquare, Plus, Trash2, Send, ChevronRight,
+  User, Settings, X, RefreshCw, Star, MapPin, DollarSign,
   HelpCircle, Heart, Bookmark, ArrowRight, ShieldAlert, ShoppingBag
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
@@ -189,7 +189,7 @@ function AIAssistantContent() {
     setStreamingText('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const response = await fetch('https://ai-salon-marketplace.onrender.com/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ function AIAssistantContent() {
 
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
-        
+
         // Save the last element because it might be incomplete
         buffer = lines.pop() || '';
 
@@ -349,7 +349,7 @@ function AIAssistantContent() {
   // Render text content without the follow-up suggestions which will be rendered as interactive pills at the bottom
   const renderCleanMessageContent = (text: string) => {
     const lines = text.split('\n');
-    
+
     // Filter out ending follow-up lines starting with "• " or similar, so they don't print twice
     const cleanLines = lines.filter(line => {
       const trimmed = line.trim();
@@ -429,53 +429,50 @@ function AIAssistantContent() {
     return profs;
   })();
 
-  const activeFollowUps = messages.length > 0 && messages[messages.length - 1].sender === 'ai' 
-    ? extractFollowUps(messages[messages.length - 1].text) 
+  const activeFollowUps = messages.length > 0 && messages[messages.length - 1].sender === 'ai'
+    ? extractFollowUps(messages[messages.length - 1].text)
     : [];
 
   return (
     <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-6 min-h-[85vh]">
-      
+
       {/* Mobile Tab Switcher */}
       <div className="flex lg:hidden bg-gray-50 dark:bg-gray-900/60 p-1.5 rounded-2xl border border-gray-150 dark:border-gray-800 w-full mb-1 flex-shrink-0 select-none">
         <button
           type="button"
           onClick={() => setMobileTab('history')}
-          className={`flex-1 py-2.5 text-center font-bold text-xs rounded-xl transition-all cursor-pointer ${
-            mobileTab === 'history'
-              ? 'bg-white dark:bg-gray-800 text-primary shadow-sm border border-gray-100 dark:border-gray-700'
-              : 'text-gray-500 dark:text-gray-400'
-          }`}
+          className={`flex-1 py-2.5 text-center font-bold text-xs rounded-xl transition-all cursor-pointer ${mobileTab === 'history'
+            ? 'bg-white dark:bg-gray-800 text-primary shadow-sm border border-gray-100 dark:border-gray-700'
+            : 'text-gray-500 dark:text-gray-400'
+            }`}
         >
           History
         </button>
         <button
           type="button"
           onClick={() => setMobileTab('chat')}
-          className={`flex-1 py-2.5 text-center font-bold text-xs rounded-xl transition-all cursor-pointer ${
-            mobileTab === 'chat'
-              ? 'bg-white dark:bg-gray-800 text-primary shadow-sm border border-gray-100 dark:border-gray-700'
-              : 'text-gray-500 dark:text-gray-400'
-          }`}
+          className={`flex-1 py-2.5 text-center font-bold text-xs rounded-xl transition-all cursor-pointer ${mobileTab === 'chat'
+            ? 'bg-white dark:bg-gray-800 text-primary shadow-sm border border-gray-100 dark:border-gray-700'
+            : 'text-gray-500 dark:text-gray-400'
+            }`}
         >
           Consultation
         </button>
         <button
           type="button"
           onClick={() => setMobileTab('marketplace')}
-          className={`flex-1 py-2.5 text-center font-bold text-xs rounded-xl transition-all cursor-pointer ${
-            mobileTab === 'marketplace'
-              ? 'bg-white dark:bg-gray-800 text-primary shadow-sm border border-gray-100 dark:border-gray-700'
-              : 'text-gray-500 dark:text-gray-400'
-          }`}
+          className={`flex-1 py-2.5 text-center font-bold text-xs rounded-xl transition-all cursor-pointer ${mobileTab === 'marketplace'
+            ? 'bg-white dark:bg-gray-800 text-primary shadow-sm border border-gray-100 dark:border-gray-700'
+            : 'text-gray-500 dark:text-gray-400'
+            }`}
         >
           Marketplace Info
         </button>
       </div>
-      
+
       {/* COLUMN 1: LEFT SIDEBAR - CHAT HISTORY & PROFILE TRIGGER (Width: 300px) */}
       <aside className={`w-full lg:w-[300px] flex-shrink-0 flex-col gap-5 max-h-[82vh] lg:sticky lg:top-24 ${mobileTab === 'history' ? 'flex' : 'hidden lg:flex'}`}>
-        
+
         {/* Profile Card & Settings */}
         <div className="bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl p-4.5 shadow-sm flex flex-col gap-4">
           <div className="flex items-center gap-3">
@@ -528,13 +525,12 @@ function AIAssistantContent() {
               sessions.map((s) => {
                 const isActive = activeSessionId === s.id;
                 return (
-                  <div 
+                  <div
                     key={s.id}
-                    className={`group flex items-center justify-between p-2.5 rounded-xl border text-xs font-semibold cursor-pointer transition-all ${
-                      isActive 
-                        ? 'bg-pink-50/30 border-pink-200 text-primary dark:bg-pink-955/25 dark:border-pink-900' 
-                        : 'border-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900'
-                    }`}
+                    className={`group flex items-center justify-between p-2.5 rounded-xl border text-xs font-semibold cursor-pointer transition-all ${isActive
+                      ? 'bg-pink-50/30 border-pink-200 text-primary dark:bg-pink-955/25 dark:border-pink-900'
+                      : 'border-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900'
+                      }`}
                     onClick={() => loadSession(s.id)}
                   >
                     <div className="flex items-center gap-2 truncate pr-2">
@@ -560,7 +556,7 @@ function AIAssistantContent() {
         {/* Favorite Salons List */}
         <div className="bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl p-5 flex flex-col gap-3 shadow-sm max-h-[250px] overflow-y-auto no-scrollbar">
           <span className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest pl-1">Saved Favorites</span>
-          
+
           <div className="flex flex-col gap-2">
             {!user ? (
               <p className="text-[11px] text-gray-400 dark:text-gray-500 italic pl-1">Sign in to save salons.</p>
@@ -595,7 +591,7 @@ function AIAssistantContent() {
 
       {/* COLUMN 2: CENTER PANEL - MAIN AI CONVERSATION AREA */}
       <main className={`flex-1 flex-col bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl shadow-sm max-h-[82vh] overflow-hidden ${mobileTab === 'chat' ? 'flex' : 'hidden lg:flex'}`}>
-        
+
         {/* Chat Area Header */}
         <div className="bg-pink-50/20 dark:bg-gray-900/60 p-4 border-b border-pink-100/40 dark:border-gray-750 flex justify-between items-center">
           <div className="flex items-center gap-2.5">
@@ -618,7 +614,7 @@ function AIAssistantContent() {
 
         {/* Messages list */}
         <div className="flex-grow overflow-y-auto p-5 flex flex-col gap-6 no-scrollbar">
-          
+
           {/* Welcome and presets when chat is empty */}
           {messages.length === 0 && !streamingText && (
             <div className="my-auto flex flex-col items-center text-center gap-5 py-8 max-w-xl mx-auto">
@@ -662,20 +658,18 @@ function AIAssistantContent() {
             const isUser = m.sender === 'user';
             return (
               <div key={idx} className={`flex gap-3.5 max-w-[85%] ${isUser ? 'self-end flex-row-reverse' : 'self-start'}`}>
-                
+
                 {/* Avatar */}
-                <div className={`h-8.5 w-8.5 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-black ${
-                  isUser ? 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200' : 'bg-primary text-white shadow-sm'
-                }`}>
+                <div className={`h-8.5 w-8.5 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-black ${isUser ? 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200' : 'bg-primary text-white shadow-sm'
+                  }`}>
                   {isUser ? <User className="w-4.5 h-4.5" /> : 'AI'}
                 </div>
 
                 {/* Bubble box */}
-                <div className={`p-4 rounded-3xl leading-relaxed ${
-                  isUser 
-                    ? 'bg-primary text-white rounded-tr-none text-xs sm:text-sm' 
-                    : 'bg-gray-50 dark:bg-gray-900/50 border border-gray-150/70 dark:border-gray-800/80 rounded-tl-none text-gray-800 dark:text-gray-200 text-xs sm:text-sm w-full'
-                }`}>
+                <div className={`p-4 rounded-3xl leading-relaxed ${isUser
+                  ? 'bg-primary text-white rounded-tr-none text-xs sm:text-sm'
+                  : 'bg-gray-50 dark:bg-gray-900/50 border border-gray-150/70 dark:border-gray-800/80 rounded-tl-none text-gray-800 dark:text-gray-200 text-xs sm:text-sm w-full'
+                  }`}>
                   {isUser ? <p className="font-semibold">{m.text}</p> : renderCleanMessageContent(m.text)}
                 </div>
               </div>
@@ -750,7 +744,7 @@ function AIAssistantContent() {
 
       {/* COLUMN 3: RIGHT SIDEBAR - DYNAMIC RECOMMENDATIONS (Width: 300px) */}
       <aside className={`w-full lg:w-[300px] flex-shrink-0 flex-col gap-5 max-h-[82vh] overflow-y-auto no-scrollbar lg:sticky lg:top-24 ${mobileTab === 'marketplace' ? 'flex' : 'hidden lg:flex'}`}>
-        
+
         {/* Dynamic header */}
         <div className="bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl p-5 shadow-sm flex flex-col gap-3">
           <div className="flex items-center gap-2 text-gray-950 dark:text-white font-serif font-extrabold text-sm sm:text-base border-b border-gray-100 dark:border-gray-700 pb-2.5">
@@ -800,9 +794,9 @@ function AIAssistantContent() {
         {liveSalons.length > 0 && (
           <div className="flex flex-col gap-3">
             <span className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest pl-1">Matching Salons ({liveSalons.length})</span>
-            
+
             {liveSalons.map((salon) => (
-              <div 
+              <div
                 key={salon.id}
                 className="bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl p-4.5 shadow-sm flex flex-col gap-3 hover:shadow-md transition-shadow"
               >
@@ -815,7 +809,7 @@ function AIAssistantContent() {
                       {salon.pricingCategory}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-3 text-[10px] text-gray-400 mt-1 font-semibold">
                     <span className="flex items-center gap-0.5 text-amber-500 font-bold">
                       <Star className="w-3.5 h-3.5 fill-amber-400" />
@@ -872,9 +866,9 @@ function AIAssistantContent() {
         {liveProducts.length > 0 && (
           <div className="flex flex-col gap-3">
             <span className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest pl-1">Retrieved Skincare & Haircare ({liveProducts.length})</span>
-            
+
             {liveProducts.map((prod) => (
-              <div 
+              <div
                 key={prod.id}
                 className="bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl p-4 flex gap-3.5 shadow-sm"
               >
@@ -890,7 +884,7 @@ function AIAssistantContent() {
                   </div>
                   <div className="flex justify-between items-center mt-1">
                     <span className="text-xs font-black text-primary">₹{prod.price}</span>
-                    <button 
+                    <button
                       onClick={() => addToast(`Saved product ${prod.name} to preferences!`, 'success')}
                       className="text-[9px] font-extrabold text-primary hover:underline"
                     >
@@ -907,7 +901,7 @@ function AIAssistantContent() {
         {liveSalons.length > 0 && allProfessionals.length > 0 && (
           <div className="flex flex-col gap-3">
             <span className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest pl-1">Specialist Stylists</span>
-            
+
             <div className="bg-white dark:bg-gray-800 border border-pink-100/50 dark:border-gray-700/60 rounded-3xl p-4 shadow-sm flex flex-col gap-3">
               {allProfessionals.map((prof) => (
                 <div key={prof.id} className="flex items-center gap-3 text-xs font-semibold">
@@ -941,7 +935,7 @@ function AIAssistantContent() {
               onClick={() => setShowProfileModal(false)}
               className="fixed inset-0 bg-black"
             />
-            
+
             {/* Modal Box */}
             <motion.div
               initial={{ scale: 0.95, y: 20, opacity: 0 }}
@@ -965,7 +959,7 @@ function AIAssistantContent() {
 
               {/* Questionnaire Form */}
               <form onSubmit={handleSaveAssessment} className="flex flex-col gap-5 text-xs sm:text-sm font-semibold">
-                
+
                 {/* 1. Hair Assessment */}
                 <div className="flex flex-col gap-3">
                   <h4 className="text-xs uppercase tracking-wider font-extrabold text-primary border-l-2 border-primary pl-2">Hair Assessment</h4>

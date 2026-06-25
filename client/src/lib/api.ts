@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ai-salon-marketplace.onrender.com/api';
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ai-salon-marketplace-6v94.onrender.com/api';
 
 export function getAuthToken(): string | null {
   if (typeof window !== 'undefined') {

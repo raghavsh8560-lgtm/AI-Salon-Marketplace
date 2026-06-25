@@ -48,10 +48,10 @@ app.post('/api/notifications/read', authenticateToken, (req: any, res: any) => {
 
 // Root path status
 app.get('/health', (req, res) => {
-  res.json({ status: 'healthy', service: 'SalonAI V2 Backend Engine', time: new Date() });
+  res.json({ status: 'healthy', service: 'Glowique V2 Backend Engine', time: new Date() });
 });
 
 // Start listening
 app.listen(PORT, () => {
-  console.log(`🚀 SalonAI V2 Backend Server running on port: ${PORT}`);
+  console.log(`🚀 Glowique V2 Backend Server running on port: ${PORT}`);
 });

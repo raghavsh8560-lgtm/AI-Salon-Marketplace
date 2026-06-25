@@ -2,7 +2,7 @@ export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ai-salon-mar
 
 export function getAuthToken(): string | null {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem('salonai_token');
+    return localStorage.getItem('glowique_token');
   }
   return null;
 }
@@ -10,9 +10,9 @@ export function getAuthToken(): string | null {
 export function setAuthToken(token: string | null) {
   if (typeof window !== 'undefined') {
     if (token) {
-      localStorage.setItem('salonai_token', token);
+      localStorage.setItem('glowique_token', token);
     } else {
-      localStorage.removeItem('salonai_token');
+      localStorage.removeItem('glowique_token');
     }
   }
 }

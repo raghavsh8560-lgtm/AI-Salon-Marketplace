@@ -33,7 +33,7 @@ export default function ContactPage() {
       {/* Page header */}
       <div className="text-center">
         <h1 className="text-3xl sm:text-4xl font-serif font-extrabold text-gray-950 dark:text-white leading-tight">
-          Get in Touch with SalonAI
+          Get in Touch with Glowique
         </h1>
         <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
           Need booking help, partner salon signups, or custom AI recommendations? Reach our team anytime.
@@ -65,12 +65,12 @@ export default function ContactPage() {
 
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-              <span>support@salonai.in</span>
+              <span>support@glowique.in</span>
             </div>
           </div>
 
           <div className="bg-pink-50/40 dark:bg-pink-950/20 text-primary border border-pink-100/40 p-4 rounded-2xl text-[10px] sm:text-xs leading-relaxed font-medium">
-            <strong>Partner salons signup:</strong> Email partners@salonai.in with your trade licenses and stylist counts to apply.
+            <strong>Partner salons signup:</strong> Email partners@glowique.in with your trade licenses and stylist counts to apply.
           </div>
         </div>
 

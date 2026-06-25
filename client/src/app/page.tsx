@@ -192,7 +192,7 @@ export default function Home() {
   const handlePackageBook = (pkg: typeof trendingPackages[0]) => {
     // Save state in localStorage or navigate with parameters
     if (typeof window !== 'undefined') {
-      localStorage.setItem('salonai_selected_services', JSON.stringify(pkg.services));
+      localStorage.setItem('glowique_selected_services', JSON.stringify(pkg.services));
     }
     router.push(`/booking?salonId=${pkg.salonId}`);
     addToast(`Preloaded ${pkg.name} package into checkout! 🌸`, 'success');
@@ -640,7 +640,7 @@ export default function Home() {
         <section className="flex flex-col gap-10">
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl font-serif font-extrabold text-gray-950 dark:text-white">
-              SalonAI Club Memberships
+              Glowique Club Memberships
             </h2>
             <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
               Subscribe to unlock premium pricing, free treatments, and fast priority checkouts.

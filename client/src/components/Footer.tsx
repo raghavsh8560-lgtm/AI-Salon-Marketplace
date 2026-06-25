@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
                 <Sparkles className="w-5 h-5 fill-white text-white" />
               </div>
               <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
-                SalonAI
+                Glowique
               </span>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -133,7 +133,7 @@ export const Footer: React.FC = () => {
             </span>
           </div>
           <div className="text-center sm:text-right">
-            &copy; {new Date().getFullYear()} SalonAI. All rights reserved. Created for Hackathons.
+            &copy; {new Date().getFullYear()} Glowique. All rights reserved. Created for Hackathons.
           </div>
         </div>
 

@@ -99,7 +99,7 @@ function AuthPageContent() {
           <div className="bg-primary text-white p-2.5 rounded-xl shadow-md flex items-center justify-center w-max">
             <Sparkles className="w-5 h-5 fill-white text-white" />
           </div>
-          <h2 className="text-2xl font-serif font-extrabold text-gray-955 dark:text-white mt-4">Welcome to SalonAI</h2>
+          <h2 className="text-2xl font-serif font-extrabold text-gray-955 dark:text-white mt-4">Welcome to Glowique</h2>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 max-w-[250px]">
             Book premium wellness & beauty services in Jaipur.
           </p>

@@ -123,7 +123,7 @@ export default function SalonDetails() {
     
     // Store in localStorage for booking flow checkout page
     if (typeof window !== 'undefined') {
-      localStorage.setItem('salonai_selected_services', JSON.stringify(selectedServices));
+      localStorage.setItem('glowique_selected_services', JSON.stringify(selectedServices));
     }
     
     router.push(`/booking?salonId=${salon.id}`);

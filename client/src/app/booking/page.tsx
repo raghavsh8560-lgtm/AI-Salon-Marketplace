@@ -55,7 +55,7 @@ function BookingFlowContent() {
   // Recover services from localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('salonai_selected_services');
+      const stored = localStorage.getItem('glowique_selected_services');
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
@@ -89,7 +89,7 @@ function BookingFlowContent() {
       addToast('Appointment scheduled successfully!', 'success');
       // Clean up preloaded services
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('salonai_selected_services');
+        localStorage.removeItem('glowique_selected_services');
       }
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
       queryClient.invalidateQueries({ queryKey: ['slotsOccupancy'] });
@@ -227,7 +227,7 @@ function BookingFlowContent() {
 
     const textContent = `
 =========================================
-          SALONAI APPOINTMENT RECEIPT
+          GLOWIQUE APPOINTMENT RECEIPT
 =========================================
 Booking ID:     ${confirmedBookingId}
 Status:         CONFIRMED (Payment at Salon Counter)
@@ -246,7 +246,7 @@ Subtotal:       INR ${subtotal}
 GST (18%):      INR ${gst}
 TOTAL AMOUNT:   INR ${finalTotal}
 =========================================
-Thank you for choosing SalonAI!
+Thank you for choosing Glowique!
 Please show this receipt at the counter.
 =========================================
 `;
@@ -505,7 +505,7 @@ Please show this receipt at the counter.
                   </div>
                   <div>
                     <div className="font-extrabold text-xs sm:text-sm text-gray-900 dark:text-white">Any Available Specialist</div>
-                    <div className="text-[10px] text-gray-400 font-semibold mt-0.5">Let SalonAI choose standard expert for you</div>
+                    <div className="text-[10px] text-gray-400 font-semibold mt-0.5">Let Glowique choose standard expert for you</div>
                   </div>
                 </div>
 

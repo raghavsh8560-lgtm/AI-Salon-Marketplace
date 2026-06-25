@@ -111,7 +111,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Initialize theme and load user profile from token on startup
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('salonai-theme');
+      const savedTheme = localStorage.getItem('glowique-theme');
       if (savedTheme === 'light' || savedTheme === 'dark') {
         setTheme(savedTheme);
       } else {
@@ -136,7 +136,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('salonai-theme', theme);
+    localStorage.setItem('glowique-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -174,7 +174,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setUser(data.user);
     setWishlist(data.user.favoriteSalons || []);
     
-    addToast('Welcome back to SalonAI! 🌸', 'success');
+    addToast('Welcome back to Glowique! 🌸', 'success');
 
     // Fetch user bookings
     const bookingsData = await apiFetch('/bookings').catch(() => []);
@@ -193,7 +193,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setAuthToken(data.token);
     setUser(data.user);
     setWishlist([]);
-    addToast('Account created successfully! Welcome to SalonAI.', 'success');
+    addToast('Account created successfully! Welcome to Glowique.', 'success');
 
     // Fetch notifications
     loadNotifications();

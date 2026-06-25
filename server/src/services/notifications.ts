@@ -25,7 +25,7 @@ export async function sendBookingNotification(bookingId: string, userId: string,
     message = `Your treatment session for booking ${bookingId} has started. Enjoy your pampering!`;
   } else if (status === 'COMPLETED') {
     title = 'Booking Completed 🎉';
-    message = `Your booking ${bookingId} has been marked as completed. Thank you for choosing SalonAI! Please feel free to leave a review.`;
+    message = `Your booking ${bookingId} has been marked as completed. Thank you for choosing Glowique! Please feel free to leave a review.`;
   } else if (status === 'CANCELLED') {
     title = 'Booking Cancelled 🚫';
     message = `Booking ${bookingId} has been cancelled successfully.`;

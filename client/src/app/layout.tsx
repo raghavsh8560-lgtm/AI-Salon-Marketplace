@@ -6,7 +6,7 @@ import { Footer } from '../components/Footer';
 import { ToastContainer } from '../components/Toast';
 
 export const metadata: Metadata = {
-  title: 'SalonAI - Premium AI Beauty & Salon Discovery Platform',
+  title: 'Glowique - Premium AI Beauty & Salon Discovery Platform',
   description: 'Book top-rated hair, skincare, and bridal salons in Jaipur. Get personalized consults from our Gemini AI Assistant.',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 };

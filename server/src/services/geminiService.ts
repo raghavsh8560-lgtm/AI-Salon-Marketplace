@@ -104,7 +104,7 @@ export async function streamGeminiChat(
   // Check Domain Restrictions
   if (isOutOfDomain(queryText)) {
     console.log('[DEBUG] Query is out of domain!');
-    const politeRedirect = `🌸 Hello! I am the SalonAI Specialist. I can only provide recommendations and consultations regarding **Hair, Skin, Beauty, Grooming, Fashion, and Lifestyle**. 
+    const politeRedirect = `🌸 Hello! I am the Glowique Specialist. I can only provide recommendations and consultations regarding **Hair, Skin, Beauty, Grooming, Fashion, and Lifestyle**. 
 
 I noticed your question seems unrelated to these areas. Could you tell me if you are looking for any hair treatments, skincare routines, or top-rated salons in Jaipur instead? I am here to help you pamper yourself!`;
     onChunk(politeRedirect);
@@ -163,7 +163,7 @@ I noticed your question seems unrelated to these areas. Could you tell me if you
 
   const contextPrompt = `
 SYSTEM INSTRUCTIONS:
-You are the Expert AI Beauty, Skincare & Lifestyle Consultant for SalonAI (premium marketplace in Jaipur).
+You are the Expert AI Beauty, Skincare & Lifestyle Consultant for Glowique (premium marketplace in Jaipur).
 You are warm, luxurious, empathetic, and highly expert.
 Respond ONLY to Hair, Skin, Beauty, Grooming, Fashion, and Lifestyle queries.
 
@@ -171,7 +171,7 @@ For any specific hair, skin, beauty, or wellness concern, you MUST structure you
 1. Explain the problem/concern in exactly 4-5 lines of text.
 2. Explain the likely causes of this concern.
 3. Suggest professional salon treatments and home-care options.
-4. Mention that you have searched the SalonAI Jaipur database.
+4. Mention that you have searched the Glowique Jaipur database.
 5. Recommend the best matching salons from the database context provided below.
 6. Explain in detail why each salon is recommended for their concern (matching their specialties, stylists, or reviews).
 
@@ -214,7 +214,7 @@ Suggested Treatments:
 • Home-care: Salicylic acid gel cleansers, hyaluronic acid moisturizers, gel sunscreen.
 
 Database Search:
-I have searched the SalonAI Jaipur database to find the best specialized skin clinics matching your profile.
+I have searched the Glowique Jaipur database to find the best specialized skin clinics matching your profile.
 
 Recommended Salons:
 1. La Belleza Salon & Spa (C-Scheme)
@@ -240,7 +240,7 @@ Suggested Treatments:
 • Home-care: Sulfate-free moisturizing shampoos, Argan oil hair serums, microfiber hair towels.
 
 Database Search:
-I have searched the SalonAI Jaipur database to find top-rated hair care salons in your vicinity.
+I have searched the Glowique Jaipur database to find top-rated hair care salons in your vicinity.
 
 Recommended Salons:
 1. La Belleza Salon & Spa (C-Scheme)
@@ -361,7 +361,7 @@ Suggested Treatments:
 • Home-care: Salicylic acid gel cleansers, hyaluronic acid moisturizers, gel sunscreen.
 
 Database Search:
-I have searched the SalonAI Jaipur database to find the best specialized skin clinics matching your profile.
+I have searched the Glowique Jaipur database to find the best specialized skin clinics matching your profile.
 
 Recommended Salons:
 1. La Belleza Salon & Spa (C-Scheme)
@@ -387,7 +387,7 @@ Suggested Treatments:
 • Home-care: Sulfate-free moisturizing shampoos, Argan oil hair serums, microfiber hair towels.
 
 Database Search:
-I have searched the SalonAI Jaipur database to find top-rated hair care salons in your vicinity.
+I have searched the Glowique Jaipur database to find top-rated hair care salons in your vicinity.
 
 Recommended Salons:
 1. La Belleza Salon & Spa (C-Scheme)

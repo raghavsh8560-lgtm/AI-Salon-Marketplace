@@ -7,7 +7,7 @@
     "build:client": "npm run build --prefix client",
     "build:server": "npm run build --prefix server",
     "build": "npm run build:server && npm run build:client",
-    "build:backend": "npm install --prefix server && npm run build --prefix server",
+    "build:backend": "npm install --prefix server && npm run db:generate --prefix server && npm run build --prefix server",
     "start:backend": "npm start --prefix server"
   },
   "devDependencies": {

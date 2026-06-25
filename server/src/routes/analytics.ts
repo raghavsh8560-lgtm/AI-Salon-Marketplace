@@ -95,7 +95,7 @@ router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Respon
       },
       select: { totalPrice: true }
     });
-    const totalRevenue = bookingsForRevenue.reduce((sum, b) => sum + b.totalPrice, 0);
+    const totalRevenue = bookingsForRevenue.reduce((sum: number, b: any) => sum + b.totalPrice, 0);
 
     const salons = await prisma.salon.findMany({
       include: {
@@ -104,11 +104,11 @@ router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Respon
       }
     });
 
-    const performance = salons.map((s) => {
+    const performance = salons.map((s: any) => {
       const tot = s.bookings.length;
-      const comp = s.bookings.filter(b => b.status === 'COMPLETED').length;
-      const rej = s.bookings.filter(b => b.status === 'REJECTED' || b.status === 'CANCELLED').length;
-      const upc = s.bookings.filter(b => b.date >= todayStr && ['PENDING', 'CONFIRMED', 'ACCEPTED'].includes(b.status)).length;
+      const comp = s.bookings.filter((b: any) => b.status === 'COMPLETED').length;
+      const rej = s.bookings.filter((b: any) => b.status === 'REJECTED' || b.status === 'CANCELLED').length;
+      const upc = s.bookings.filter((b: any) => b.date >= todayStr && ['PENDING', 'CONFIRMED', 'ACCEPTED'].includes(b.status)).length;
       const vis = s.reviewsCount * 8 + 52;
 
       return {
@@ -124,7 +124,7 @@ router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Respon
       };
     });
 
-    performance.sort((a, b) => b.totalBookings - a.totalBookings);
+    performance.sort((a: any, b: any) => b.totalBookings - a.totalBookings);
 
     res.json({
       summary: {

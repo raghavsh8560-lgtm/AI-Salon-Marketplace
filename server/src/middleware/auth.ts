@@ -6,7 +6,7 @@ if (!JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is missing.');
 }
 
-export interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request<any, any, any, any> {
   user?: {
     id: string;
     role: string;

@@ -53,5 +53,5 @@ app.get('/health', (req, res) => {
 
 // Start listening
 app.listen(PORT, () => {
-  console.log(`🚀 SalonAI V2 Backend Server running at https://ai-salon-marketplace.onrender.com :${PORT}`);
+  console.log(`🚀 SalonAI V2 Backend Server running on port: ${PORT}`);
 });

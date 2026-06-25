@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { apiFetch, getAuthToken } from '../../lib/api';
+import { apiFetch, getAuthToken, BASE_URL } from '../../lib/api';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface Message {
@@ -189,7 +189,7 @@ function AIAssistantContent() {
     setStreamingText('');
 
     try {
-      const response = await fetch('https://ai-salon-marketplace.onrender.com/api/chat', {
+      const response = await fetch(`${BASE_URL}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
